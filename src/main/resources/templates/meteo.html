@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http :// www.thymeleaf.org">
+<head>
+    <title>Météo</title>
+    <meta http-equiv="Content -Type" content="text/html; charset=UTF -8" />
+	<link rel="stylesheet" href="nav.css" />
+</head>
+
+<header>
+    <div th:include="nav"></div>
+</header>
+
+<body>
+    <h1 th:text="'Adresse saisie :  ' + ${adresseClient}"/>
+	
+	<h2>Résultats : </h2>
+	
+	<ul th:each="feat:${features}" style="list-style-type:none;">
+		<li th:text ="@{'Ville : ' + ${feat.properties.city}}" />
+		<li th:text ="@{'Code postal : ' + ${feat.properties.postcode}}" />
+		<li th:text ="@{'Latitude : ' + ${feat.geometry.coordinates[1]}}" />
+		<li th:text ="@{'Longitude : ' + ${feat.geometry.coordinates[0]}}" />
+	</ul>
+	<ul th:each="meteo:${meteo}" style="list-style-type:none;">
+		<li><img th:src="${meteo.img}"/>  <p th:text="${meteo.description}" style="display:inline"/></li>
+		<li th:text ="@{'Température : ' + ${meteo.temp} + ' °C'}" />
+		<li th:text ="@{'Température min : ' + ${meteo.temp_min} + ' °C'}" />
+		<li th:text ="@{'Température max : ' + ${meteo.temp_max} + ' °C'}" />
+		<li th:text ="@{'Température ressentie : ' + ${meteo.feels_like} + ' °C'}" />
+		<li th:text ="@{'Humidité : ' + ${meteo.humidity}} + '%'" />
+	</ul>
+</body>
+</html>
